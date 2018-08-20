@@ -175,8 +175,8 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
 # Dans ce cas, vous pouvez faire un lien symbolique. Pour les distributions linux qui installent des binaires de package dans /usr/bin, vous pouvez faire
-if [ -h /usr/bin/node ]; then
-  rm -f /usr/bin/node
+if [ -h /usr/bin/nodejs ]; then
+  rm -f /usr/bin/nodejs
 fi
 ln -s /usr/bin/nodejs /usr/bin/node
 
@@ -209,11 +209,11 @@ chown -R $instance:$instance $basedir/nodejs/node_modules/yrexpert-js/docs
 chmod -R g+rw $basedir/nodejs/node_modules/yrexpert-js/docs
 
 # ewd-express
-echo "Copier les fichiers ewd-express"
-su $instance -c "mkdir $basedir/nodejs/www/ewd-xpress-monitor"
-su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/bundle.js $basedir/nodejs/www/ewd-xpress-monitor"
-su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.html $basedir/nodejs/www/ewd-xpress-monitor"
-su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.css $basedir/nodejs/www/ewd-xpress-monitor"
+##echo "Copier les fichiers ewd-express"
+##su $instance -c "mkdir $basedir/nodejs/www/ewd-xpress-monitor"
+##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/bundle.js $basedir/nodejs/www/ewd-xpress-monitor"
+##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.html $basedir/nodejs/www/ewd-xpress-monitor"
+##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.css $basedir/nodejs/www/ewd-xpress-monitor"
 
 # Copier mumps$nodever.node_$arch
 #su $instance -c "cp $basedir/nodejs/node_modules/nodem/lib/mumps"$nodever".node_$arch $basedir/nodejs/mumps.node"
