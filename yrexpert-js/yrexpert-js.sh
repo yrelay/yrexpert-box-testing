@@ -204,6 +204,7 @@ if [ ! -d "$basedir/nodejs/www/yrexpert" ];then
 fi
 
 # Créer le répertoire docs utilisé par l'application
+echo "Créer les docs de l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf docs && mkdir docs"
 ######su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && ../.bin/jsdoc lib src -r -d docs"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && jsdoc lib src -r -d docs"
