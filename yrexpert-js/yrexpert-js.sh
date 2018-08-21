@@ -160,16 +160,18 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
 # Installer en mode global
-echo "1/5 browserify" # http://doc.progysm.com/doc/browserify
+echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
-echo "2/5 uglify-es"
+echo "2/6 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
-echo "3/5 marked"
+echo "3/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
-echo "4/5 react-devtools"
+echo "4/6 react-devtools"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g react-devtools >> $basedir/log/installerReact-devtools.log"
+echo "5/6 jsdoc"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jsdoc >> $basedir/log/installerJsdoc.log"
 # Installer le module yrexpert-js
-echo "5/5 yrexpert-js-testing"
+echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod --save-dev https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
@@ -178,7 +180,7 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 if [ -h /usr/bin/nodejs ]; then
   rm -f /usr/bin/nodejs
 fi
-ln -s /usr/bin/nodejs /usr/bin/node
+ln -s /usr/bin/node /usr/bin/nodejs
 
 echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
@@ -203,7 +205,8 @@ fi
 
 # Créer le répertoire docs utilisé par l'application
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf docs && mkdir docs"
-su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && ../.bin/jsdoc lib src -r -d docs"
+######su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && ../.bin/jsdoc lib src -r -d docs"
+su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && jsdoc lib src -r -d docs"
 # Mettre les droits
 chown -R $instance:$instance $basedir/nodejs/node_modules/yrexpert-js/docs
 chmod -R g+rw $basedir/nodejs/node_modules/yrexpert-js/docs
