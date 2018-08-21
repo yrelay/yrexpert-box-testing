@@ -207,7 +207,7 @@ fi
 echo "Créer les docs de l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf docs && mkdir docs"
 ######su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && ../.bin/jsdoc lib src -r -d docs"
-su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && source jsdoc lib src -r -d docs"
+su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && jsdoc lib src -r -d docs"
 # Mettre les droits
 chown -R $instance:$instance $basedir/nodejs/node_modules/yrexpert-js/docs
 chmod -R g+rw $basedir/nodejs/node_modules/yrexpert-js/docs
