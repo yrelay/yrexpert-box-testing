@@ -174,7 +174,7 @@ echo "5/6 jsdoc"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jsdoc >> $basedir/log/installerJsdoc.log"
 # Installer le module yrexpert-js
 echo "6/6 yrexpert-js-testing"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --dev --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --only=dev --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
