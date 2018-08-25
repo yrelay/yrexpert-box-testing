@@ -180,7 +180,7 @@ echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
 ##su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [es2015 react stage-3] ] App.js | uglifyjs > ../../build/bundle.js"
 ##su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [@babel/preset-env @babel/preset-react] ] App.js | uglifyjs > ../../build/bundle.js"
-su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [es2015 react] ] App.js | uglifyjs > ../../build/bundle.js"
+su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [@babel/preset-env react] ] App.js | uglifyjs > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/css/json-inspector.css build/json-inspector.css"
