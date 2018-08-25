@@ -96,7 +96,6 @@ EOF
 # Mettre les droits corrects
 chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 
-
 # Installer les modules de node requis dans $basedir/nodejs
 # L'installation de yrexpert-js comprend :
 # * les modules yrexpert :
@@ -168,8 +167,8 @@ echo "2/6 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
 echo "3/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
-echo "4/6 react-devtools"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g react-devtools >> $basedir/log/installerReact-devtools.log"
+##echo "4/6 react-devtools"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g react-devtools >> $basedir/log/installerReact-devtools.log"
 echo "5/6 jsdoc"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jsdoc >> $basedir/log/installerJsdoc.log"
 # Installer le module yrexpert-js
