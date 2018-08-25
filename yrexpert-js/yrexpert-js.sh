@@ -100,20 +100,19 @@ chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 cd $basedir/nodejs
 
 # Installer en mode global
-echo "1/7 browserify" # http://doc.progysm.com/doc/browserify
+echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev browserify >> $basedir/log/installerBrowserify.log"
-echo "2/7 babelify@next"
+echo "2/6 babelify@next"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
-echo "3/7 uglify-es"
+echo "3/6 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev uglify-es >> $basedir/log/installerUglify-es.log"
-echo "4/7 marked"
+echo "4/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev marked >> $basedir/log/installerMarked.log"
-echo "5/7 jsdoc"
+echo "5/6 jsdoc"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev jsdoc >> $basedir/log/installerJsdoc.log"
+
 # Installer le module yrexpert-js
-##echo "6/7 react-devtools"
-##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev react-devtools >> $basedir/log/installerReact-devtools.log"
-echo "7/7 yrexpert-js-testing"
+echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
