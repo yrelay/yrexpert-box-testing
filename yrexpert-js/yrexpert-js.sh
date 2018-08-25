@@ -97,83 +97,23 @@ EOF
 chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 
 # Installer les modules de node requis dans $basedir/nodejs
-# L'installation de yrexpert-js comprend :
-# * les modules yrexpert :
-#    yrexpert-term - Terminal mode navigateur pour yrexpert-js...
-#    yrexpert-rpc - Accès REST aux RPCs de yrexpert... 
-#    yrexpert-gtm - Intégrer des modules workers avec la base de données GT.M
-# * les modules standard : 
-#    express
-#    toastr
-#    body-parser
-#    moment
-#    reactify
-#    nodem
-# * les modules de node ewd :
-#    ewd-qoper8-express
-#    ewd-xpress
-#    ewd-qoper8
-#    ewd-session
-#    ewd-document-store
-#    ewd-client
-#    ewd-react-tools
-#    ewd-xpress-react
-# * les outils de développement :
-#    react
-#    react-dom
-#    react-json-inspector
-#    babelify
-#    babel-preset-react
-#    react-bootstrap
-#    react-toastr
-#    react-select
-#    socket.io-client
-#    jquery
-#    babel-preset-es2015 - à supprimer car deprecated *****
-#    babel-preset-env
-#    babel-plugin-transform-object-rest-spread
-#    babel-preset-stage-0
-#    babel-preset-stage-1
-#    babel-preset-stage-2
-#    babel-preset-stage-3
-#    webpack - 171001
-#    webpack-dev-server - 171001
-#    babel-core - 171001
-#    babel-loader - 171001
-#    babel-preset-react-hmre - 171001
-#    react-router - 171001
-# * le générateur de documentation :
-#    jsdoc
-# Les outils installés en mode global :
-#    browserify"
-#    uglify-js"
-
-# Installer les modules de node requis
 cd $basedir/nodejs
 
 # Installer en mode global
-echo "1/10 browserify" # http://doc.progysm.com/doc/browserify
+echo "1/7 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev browserify >> $basedir/log/installerBrowserify.log"
-echo "2/10 @babel/preset-env"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev @babel/preset-env@7.0.0-rc.3 >> $basedir/log/installer@babel/preset-env.log"
-echo "3/10 @babel/core"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev @babel/core@7.0.0-rc.3 >> $basedir/log/installer@babel/core.log"
-echo "4/10 @babel/preset-react"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev @babel/preset-react@7.0.0-rc.3 >> $basedir/log/installer@babel/preset-react.log"
-echo "5/10 babel-core"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babel-core@7.0.0-bridge.0 >> $basedir/log/installerBabel-core.log"
-echo "6/10 babelify@next"
+echo "2/7 babelify@next"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
-echo "7/10 uglify-es"
+echo "3/7 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev uglify-es >> $basedir/log/installerUglify-es.log"
-echo "8/10 marked"
+echo "4/7 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev marked >> $basedir/log/installerMarked.log"
-echo "9/10 jsdoc"
+echo "5/7 jsdoc"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev jsdoc >> $basedir/log/installerJsdoc.log"
 # Installer le module yrexpert-js
-##echo "5/6 react-devtools"
+##echo "6/7 react-devtools"
 ##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev react-devtools >> $basedir/log/installerReact-devtools.log"
-echo "10/10 yrexpert-js-testing"
+echo "7/7 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
@@ -186,8 +126,6 @@ ln -s /usr/bin/node /usr/bin/nodejs
 
 echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
-##su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [es2015 react stage-3] ] App.js | uglifyjs > ../../build/bundle.js"
-##su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --compact false --presets [@babel/preset-env @babel/preset-react] ] App.js | uglifyjs > ../../build/bundle.js"
 su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] ] App.js | uglifyjs > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"
@@ -210,18 +148,10 @@ fi
 # Créer le répertoire docs utilisé par l'application
 echo "Créer les docs de l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf docs && mkdir docs"
-######su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && ../.bin/jsdoc lib src -r -d docs"
 su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && jsdoc lib src -r -d docs"
 # Mettre les droits
 chown -R $instance:$instance $basedir/nodejs/node_modules/yrexpert-js/docs
 chmod -R g+rw $basedir/nodejs/node_modules/yrexpert-js/docs
-
-# ewd-express
-##echo "Copier les fichiers ewd-express"
-##su $instance -c "mkdir $basedir/nodejs/www/ewd-xpress-monitor"
-##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/bundle.js $basedir/nodejs/www/ewd-xpress-monitor"
-##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.html $basedir/nodejs/www/ewd-xpress-monitor"
-##su $instance -c "cp $basedir/nodejs/node_modules/ewd-xpress-monitor/www/*.css $basedir/nodejs/www/ewd-xpress-monitor"
 
 # Copier mumps$nodever.node_$arch
 #su $instance -c "cp $basedir/nodejs/node_modules/nodem/lib/mumps"$nodever".node_$arch $basedir/nodejs/mumps.node"
@@ -236,10 +166,6 @@ calltab=$(ls -1 $basedir/nodejs/node_modules/nodem/resources/*.ci)
 echo "export GTMCI=$calltab" >> $basedir/config/env
 # Ajouter les routines nodem dans gtmroutines
 echo "export gtmroutines=\"\${gtmroutines}\"\" \"\$basedir/nodejs/node_modules/nodem/src" >> $basedir/config/env
-
-# Ajouter les routines yrexpert-RPC dans gtmroutines
-########echo "export gtmroutines=\"\${gtmroutines}\"\" \"\$basedir/nodejs/node_modules/yrexpert-RPC/mumps" >> $basedir/config/env
-######su $instance -c "cp $basedir/nodejs/node_modules/yrexpert-rpc/mumps/*.m $basedir/s"
 
 # Créer la configuration ewd.js
 cat > $basedir/nodejs/node_modules/yrelay-config.js << EOF
