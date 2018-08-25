@@ -152,12 +152,12 @@ chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 # Installer les modules de node requis
 cd $basedir/nodejs
 #echo "0/5 Initialiser le fichier package.json"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.description 'Interface Web pour votre système expert...' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.keywords '[yrexpert-js]' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
 # Installer en mode global
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
@@ -176,9 +176,17 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
-echo "6B/6 yrexpert-js-testing"
+echo "6.1/6 yrexpert-js-testing"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev --only=dev >> $basedir/log/installerYRexpert-js.log"
 
+echo "6.2/6 ewd-xpress-react"
+su $instance -c "cd $basedir/nodejs/node_modules/ewd-xpress-react && source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev --only=dev >> $basedir/log/installerYRexpert-js.log"
+
+
+
+
+# Path
+#PATH=$PATH:$basedir/nodejs/node_modules/yrexpert-js/node_modules/.bin
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
