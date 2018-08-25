@@ -99,6 +99,14 @@ chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 # Installer les modules de node requis dans $basedir/nodejs
 cd $basedir/nodejs
 
+#echo "0/5 Initialiser le fichier package.json"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info2@yrelay.fr' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.description 'Interface Web pour votre système expert...' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.keywords '[yrexpert-js]' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' && npm init -y >> $basedir/log/initNpm.log"
+
 # Installer en mode global
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev browserify >> $basedir/log/installerBrowserify.log"
