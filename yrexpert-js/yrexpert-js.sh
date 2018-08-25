@@ -176,13 +176,6 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
-echo "6.1/6 yrexpert-js-testing"
-su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev --only=dev >> $basedir/log/installerYRexpert-js.log"
-
-# Path
-PATH=$PATH:$basedir/nodejs/node_modules/yrexpert-js/node_modules/.bin
-NODE_PATH=$NODE_PATH:$basedir/nodejs/node_modules:$basedir/nodejs/node_modules/yrexpert-js/node_modules
-
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
 # Dans ce cas, vous pouvez faire un lien symbolique. Pour les distributions linux qui installent des binaires de package dans /usr/bin, vous pouvez faire
