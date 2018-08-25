@@ -100,26 +100,30 @@ chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 cd $basedir/nodejs
 
 #echo "0/5 Initialiser le fichier package.json"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info2@yrelay.fr' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.description 'Interface Web pour votre système expert...' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.keywords '[yrexpert-js]' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' && npm init -y >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.repository '{}' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
-# Installer en mode global
+
+
+
+# Installer en mode global les outils de développement
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev browserify >> $basedir/log/installerBrowserify.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
+echo "3/6 uglify-es"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
+echo "4/6 marked"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
+echo "5/6 jsdoc"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jsdoc >> $basedir/log/installerJsdoc.log"
+
+# Installer les modules locaux
 echo "2/6 babelify@next"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
-echo "3/6 uglify-es"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev uglify-es >> $basedir/log/installerUglify-es.log"
-echo "4/6 marked"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev marked >> $basedir/log/installerMarked.log"
-echo "5/6 jsdoc"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g --save-dev jsdoc >> $basedir/log/installerJsdoc.log"
-
-# Installer le module yrexpert-js
 echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
