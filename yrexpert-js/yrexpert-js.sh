@@ -176,8 +176,8 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 echo "6/6 yrexpert-js-testing"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js.log"
 
-#echo "6B/6 yrexpert-js-testing"
-#su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev --only=dev >> $basedir/log/installerYRexpert-js.log"
+echo "6B/6 yrexpert-js-testing"
+su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev --only=dev >> $basedir/log/installerYRexpert-js.log"
 
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
