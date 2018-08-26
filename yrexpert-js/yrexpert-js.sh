@@ -170,8 +170,8 @@ EOF
 chown $instance:$instance $basedir/nodejs/node_modules/yrelay-config.js
 
 # Installer les droits webservice
-echo "Installer les droits webservice"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && cd $basedir/nodejs && node registerWSClient.js"
+##echo "Installer les droits webservice"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && cd $basedir/nodejs && node registerWSClient.js"
 
 # Modifier les scripts init.d pour les rendre compatibles avec $instance
 perl -pi -e 's#y-instance#'$instance'#g' $basedir/config/init.d/yrexpert-js
