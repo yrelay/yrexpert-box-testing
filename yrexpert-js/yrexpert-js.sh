@@ -63,16 +63,6 @@ fi
 # Créer les répertoires pour node
 su $instance -c "source $basedir/config/env && mkdir $basedir/nodejs"
 
-# Créer un script d'installation silencieux pour EWD.js
-##cat > $basedir/nodejs/silent.js << EOF
-##{
-##    "silent": true,
-##    "extras": false
-##}
-##EOF
-# Mettre les droits corrects
-##chown $instance:$instance $basedir/nodejs/silent.js
-
 # Créer un script d'installation silencieux pour yrexpert-js
 cat > $basedir/nodejs/yrexpert-jsSilent.js << EOF
 {
@@ -155,10 +145,6 @@ su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && jsdoc lib src 
 chown -R $instance:$instance $basedir/nodejs/node_modules/yrexpert-js/docs
 chmod -R g+rw $basedir/nodejs/node_modules/yrexpert-js/docs
 
-# Copier mumps$nodever.node_$arch
-#su $instance -c "cp $basedir/nodejs/node_modules/nodem/lib/mumps"$nodever".node_$arch $basedir/nodejs/mumps.node"
-#su $instance -c "mv $basedir/nodejs/node_modules/nodem/lib/mumps"$nodever".node_$arch $basedir/nodejs/node_modules/nodem/lib/mumps.node"
-
 # Copier toutes les routines de yrexpert-js
 su $instance -c "find $basedir/nodejs/node_modules/yrexpert-js -name \"*.m\" -type f -exec cp {} $basedir/p/ \;"
 
@@ -184,8 +170,8 @@ EOF
 chown $instance:$instance $basedir/nodejs/node_modules/yrelay-config.js
 
 # Installer les droits webservice
-#echo "Installer les droits webservice"
-#su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && cd $basedir/nodejs && node registerWSClient.js"
+echo "Installer les droits webservice"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && cd $basedir/nodejs && node registerWSClient.js"
 
 # Modifier les scripts init.d pour les rendre compatibles avec $instance
 perl -pi -e 's#y-instance#'$instance'#g' $basedir/config/init.d/yrexpert-js
