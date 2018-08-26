@@ -64,26 +64,14 @@ fi
 su $instance -c "source $basedir/config/env && mkdir $basedir/nodejs"
 
 # Créer un script d'installation silencieux pour EWD.js
-cat > $basedir/nodejs/silent.js << EOF
-{
-    "silent": true,
-    "extras": false
-}
-EOF
-
+##cat > $basedir/nodejs/silent.js << EOF
+##{
+##    "silent": true,
+##    "extras": false
+##}
+##EOF
 # Mettre les droits corrects
-chown $instance:$instance $basedir/nodejs/silent.js
-
-# Créer un script d'installation silencieux pour yrexpert-term
-cat > $basedir/nodejs/yrexpert-termSilent.js << EOF
-{
-    "silent": true,
-    "extras": true
-}
-EOF
-
-# Mettre les droits corrects
-chown $instance:$instance $basedir/nodejs/yrexpert-termSilent.js
+##chown $instance:$instance $basedir/nodejs/silent.js
 
 # Créer un script d'installation silencieux pour yrexpert-js
 cat > $basedir/nodejs/yrexpert-jsSilent.js << EOF
@@ -92,24 +80,27 @@ cat > $basedir/nodejs/yrexpert-jsSilent.js << EOF
     "extras": true
 }
 EOF
-
 # Mettre les droits corrects
 chown $instance:$instance $basedir/nodejs/yrexpert-jsSilent.js
 
+# Créer un script d'installation silencieux pour yrexpert-term
+cat > $basedir/nodejs/yrexpert-termSilent.js << EOF
+{
+    "silent": true,
+    "extras": true
+}
+EOF
+# Mettre les droits corrects
+chown $instance:$instance $basedir/nodejs/yrexpert-termSilent.js
+
 # Installer les modules de node requis dans $basedir/nodejs
 cd $basedir/nodejs
-
 #echo "0/5 Initialiser le fichier package.json"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.url 'https://www.yrelay.fr' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.description 'Interface Web pour votre système expert...' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.keywords '[yrexpert-js]' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.repository '{}' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
-
-
-
 
 # Installer en mode global les outils de développement
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify

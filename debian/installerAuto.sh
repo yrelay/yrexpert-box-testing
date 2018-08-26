@@ -301,27 +301,7 @@ if $repertoireDev; then
     perl -pi -e 's#export gtmroutines=\"#export gtmroutines=\"\$basedir/p/\$gtmver\(\$basedir/p\) \$basedir/s/\$gtmver\(\$basedir/s\) #' $basedir/config/env
 fi
 
-# Installer yrexpert-js
-if $installerJS; then
-    cd $repScript/yrexpert-js
-    ./yrexpert-js.sh
-    cd $basedir
-fi
-
-# Construire un environnement nodejs pour yrexpert
-# L'environnement yrexpert-js sera cloner depuis les dépots yrexpert-js
-# Copier le réperotre /www/
-
-# Cloner le dépot yrexpert-js
-#***cd $basedir/src
-#***git clone $cheminDepotJS yrexpert-js
-
-# Retourner à $basedir
-#***cd $basedir
-
-# Effectuer l'importation de yrexpert-js
-#***su $instance -c "source $basedir/config/env && $repScript/gtm/importerYRexpert-js.sh"
-
+# Installer yrexpert-dmo--------------------------------------------------------
 # Construire un environnement pour la partition utilisateur (par défaut DMO)
 # L'environnement de la partition utilisateur sera cloner depuis le dépot $partitionUtil 
 # Créer la partititon utilisateur avec importerPartitionUtil.sh
@@ -339,6 +319,15 @@ cd $repScript
 
 # Effectuer l'importation de yrexpert-$partitionUtil
 su $instance -c "source $basedir/partitions/${partitionUtil,,}/config/env && $repScript/gtm/importerPartitionUtil.sh"
+#-------------------------------------------------------------------------------
+
+# Installer yrexpert-js---------------------------------------------------------
+if $installerJS; then
+    cd $repScript/yrexpert-js
+    ./yrexpert-js.sh
+    cd $basedir
+fi
+#-------------------------------------------------------------------------------
 
 # Ajouter les outils de développement
 # Axiom - Developer tools for editing M[UMPS]/GT.M routines in Vim
