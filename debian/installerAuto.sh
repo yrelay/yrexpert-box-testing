@@ -217,8 +217,8 @@ if [ -d /vagrant ]; then
 
     # Convertir les fins de lignes
     find /vagrant -name \"*.sh\" -type f -print0 | xargs -0 dos2unix > /dev/null 2>&1
-    dos2unix /vagrant/ewd/config/init.d/ewdjs > /dev/null 2>&1
     dos2unix /vagrant/gtm/config/init.d/yrexpert > /dev/null 2>&1
+    dos2unix /vagrant/gtm/config/init.d/yrexpert-js > /dev/null 2>&1
 
 else
     # TODO: à commenter

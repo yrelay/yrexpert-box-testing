@@ -9,6 +9,12 @@
 # Supprimer des répertoires par exemple Routines, Objects, Globals, Journals,
 # Temp Files
 
+# Assurez-vous que nous sommes en root
+if [[ $EUID -ne 0 ]]; then
+    echo "Ce script doit être exécuté en tant que root" 1>&2
+    exit 1
+fi
+
 # Options
 # instance = nom de l'instance
 # Utilisation http://rsalveti.wordpress.com/2007/04/03/bash-parsing-arguments-with-getopts/
@@ -19,12 +25,11 @@ usage()
     cat << EOF
     usage: $0 options
 
-    Ce script va supprimer une instance Yexpert pour GT.M
+    Ce script supprime une instance Yexpert pour GT.M
 
     OPTIONS:
       -h    Afficher ce message
       -i    Nom de l'instance
-      -d    Nom de la database
 EOF
 }
 
@@ -36,10 +41,7 @@ do
             exit 1
             ;;
         i)
-            instance=$(echo $OPTARG |tr '[:upper:]' '[:lower:]')
-            ;;
-        d)
-            database=$(echo $OPTARG |tr '[:upper:]' '[:lower:]')
+            export instance=$(echo $OPTARG |tr '[:upper:]' '[:lower:]')
             ;;
     esac
 done
@@ -50,10 +52,22 @@ then
     exit 1
 fi
 
+if [[ -z $basedir ]]
+then
+    export basedir=/home/$instance
+fi
+
+if [[ -z $gtm_dist ]]
+then
+    export gtm_dist=$basedir/libraries/gtm
+fi
+
 # Assurez-vous que nous sommes dans le groupe, nous devons être capable
 # de modifier l'instance
-if [[ $USER -ne $instance && $basedir && $gtm_dist && $instance ]]; then
-    echo "Ce script doit être exécuté en tant que $instance et avoir défini les variables suivantes :
+if [[ $USER != $instance && -n $basedir && -n $gtm_dist && -n $instance ]]; then
+    echo "Suppression de $instance..."
+else
+    echo "Ce script doit être exécuté en tant que $instance et avoir défini les variables suivantes : 
     \$basedir
     \$instance
     \$gtm_dist" 1>&2
@@ -68,7 +82,7 @@ if [ ! -z "${processes}" ] ; then
     echo "Arrêt des processus M restants"
     for i in ${processes}
     do
-        mupip stop ${i}
+        $gtm_dist/mupip stop ${i}
     done
 
     # Attendre que le processus réagisse à mupip, pour éviter de forcer
@@ -83,15 +97,13 @@ if [ ! -z "${processes}" ] ; then
     pkill -9 mumps
 fi
 
-* Supprimer proprement les services
+# Supprimer proprement les services
 /etc/init.d/${instance}yrexpert stop
 update-rc.d -f ${instance}yrexpert remove
 rm /etc/init.d/${instance}yrexpert
-rm /usr/bin/${instance}yrexpert
 /etc/init.d/${instance}yrexpert-js stop
 update-rc.d -f ${instance}yrexpert-js remove
 rm /etc/init.d/${instance}yrexpert-js
-rm /usr/bin/${instance}yrexpert-js
 
 # Supprimer les répartoires de l'instance
 rm -f $basedir/routines/*.m
@@ -100,13 +112,8 @@ rm -f $basedir/globals/*.dat
 rm -f $basedir/journals/*.mjl
 
 # Recréer les bases de données
+#TODO: définir quelles bases recréer
 $gtm_dist/mupip create
-
-if [ $database ]]; then
-    # TODO: créer la désinstallation de la database
-    echo "Déinstaller la database : ${database}..."
-    echo "voir TODO..."
-fi
 
 echo "Suppression de l'instance $instance terminée"
 
