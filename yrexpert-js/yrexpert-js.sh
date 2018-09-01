@@ -14,7 +14,7 @@ if [[ -z $instance && $gtmver && $gtm_dist && $basedir ]]; then
 fi
 
 # Définir la version de node
-nodever="8" #version LST
+nodever="10" #version LST
 
 # Définir la variable arch
 arch=$(uname -m | tr -d _)
