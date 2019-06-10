@@ -104,7 +104,7 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 
 # Installer les modules locaux
 echo "5/6 yrexpert-js-testing"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod yrexpert-js-testing >> $basedir/log/installerYrexpert-js-testing.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod https://github.com/yrelay/yrexpert-js-testing/tarball/master >> $basedir/log/installerYRexpert-js-testing.log"
 echo "6/6 babelify@next"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
 
