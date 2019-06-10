@@ -41,9 +41,9 @@ usage()
     Ce script permet de créer automatiquement une instance YRexpert pour GT.M sur Debian
 
     DEFAULTS:
-      Dépôt yrexpert-box alternatif = https://github.com/yrelay/yrexpert-box-testing.git
+      Dépôt yrexpert-box-testing alternatif = https://github.com/yrelay/yrexpert-box-testing.git
       Dépôt yrexpert-m alternatif = https://github.com/yrelay/yrexpert-m.git
-      Dépôt yrexpert-js alternatif = https://github.com/yrelay/yrexpert-js-testing.git
+      Dépôt yrexpert-js alternatif = https://github.com/yrelay/yrexpert-js.git
       Dépôt de la partition utilisateur = https://github.com/yrelay/yrexpert-dmo.git
       Installer yrexpert-js = false
       Créer les répertoires de développement = false
@@ -119,7 +119,7 @@ if [[ -z $cheminDepot ]]; then
     cheminDepot="https://github.com/yrelay/"
     cheminDepotBox="https://github.com/yrelay/yrexpert-box-testing.git"
     cheminDepotM="https://github.com/yrelay/yrexpert-m.git"
-    cheminDepotJS="https://github.com/yrelay/yrexpert-js-testing.git"
+    cheminDepotJS="https://github.com/yrelay/yrexpert-js.git"
     cheminDepotPartUtil="https://github.com/yrelay/yrexpert-dmo.git"
 fi
 
