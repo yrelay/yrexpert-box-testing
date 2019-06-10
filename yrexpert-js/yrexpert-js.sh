@@ -95,6 +95,8 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.readme 'README.md' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set description 'L interface Web pour votre système expert...' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set repository 'git+https://github.com/yrelay/yrexpert-js' >> $basedir/log/initNpm.log"
 
 # Installer en mode global les outils de développement
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
