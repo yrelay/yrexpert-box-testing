@@ -86,11 +86,11 @@ chown $instance:$instance $basedir/nodejs/yrexpert-termSilent.js
 # Installer les modules de node requis dans $basedir/nodejs
 cd $basedir/nodejs
 #echo "0/5 Initialiser le fichier package.json"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.url 'https://www.yrelay.fr' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.url 'https://www.yrelay.fr' >> $basedir/log/initNpm.log"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
 # Installer en mode global les outils de développement
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
@@ -104,9 +104,9 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 
 # Installer les modules locaux
 echo "5/6 yrexpert-js"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod yrexpert-js >> $basedir/log/installerYrexpert-js.log"
-echo "6/6 babelify@next"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet yrexpert-js >> $basedir/log/installerYrexpert-js.log"
+##echo "6/6 babelify@next"
+##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify@next >> $basedir/log/installerBabelify@next.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
