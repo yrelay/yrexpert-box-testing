@@ -100,7 +100,7 @@ echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
 echo "2/6 uglify-js"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
-echo "3/6 babelify@next"
+echo "3/6 babelify"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify >> $basedir/log/installerBabelify.log"
 echo "4/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
@@ -109,7 +109,7 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 
 # Installer les modules locaux
 echo "6/6 yrexpert-js"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet yrexpert-js >> $basedir/log/installerYrexpert-js.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet yrexpert-js --only=dev >> $basedir/log/installerYrexpert-js.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
 # Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
