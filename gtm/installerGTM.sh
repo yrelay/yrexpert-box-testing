@@ -40,7 +40,7 @@ else
   fi
   mkdir /tmp/gtminstall # Créer un répertoire temporaire pour le programme d'installation
   cd /tmp/gtminstall    # Se déplacer sur le répertoire temporaire
-  wget https://sourceforge.net/projects/fis-gtm/files/GT.M%20Installer/v0.13/gtminstall #  Télécharger le programme d'installation GT.M
+  wget https://sourceforge.net/projects/fis-gtm/files/GT.M%20Installer/v0.14/gtminstall #  Télécharger le programme d'installation GT.M
   chmod +x gtminstall # Rendre le fichier exécutable
 
   # Définir variables
