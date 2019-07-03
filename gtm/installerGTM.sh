@@ -54,7 +54,8 @@ else
   sudo mkdir -p $gtmcurrent
   
   # Télécharger et installer GT.M, y compris UTF-8 mode
-  sudo -E ./gtminstall --overwrite-existing --utf8 default --verbose --linkenv $gtmcurrent --linkexec $gtmcurrent > /dev/null
+#  sudo -E ./gtminstall --overwrite-existing --utf8 default --verbose --linkenv $gtmcurrent --linkexec $gtmcurrent > /dev/null
+  sudo -E ./gtminstall --overwrite-existing --utf8 default --verbose --linkenv $gtmcurrent --linkexec $gtmcurrent
 
   echo 'Configurer GT.M'
 
