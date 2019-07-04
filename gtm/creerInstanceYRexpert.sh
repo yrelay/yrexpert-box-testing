@@ -22,7 +22,7 @@ fi
 
 # Si icu-config n'est pas installé
 #buster# apt-get install -y libicu-dev
-apt_get update
+apt-get update
 apt-get install -y icu-devtools
 
 # Options
