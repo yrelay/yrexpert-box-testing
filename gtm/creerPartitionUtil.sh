@@ -25,6 +25,11 @@ fi
 # TODO: à modifier
 #apt-get install chkconfig
 
+# Si icu-config n'est pas installé
+#buster# apt-get install -y libicu-dev
+#apt_get update
+#apt-get install -y icu-devtools
+
 # Options
 # Utilisation http://rsalveti.wordpress.com/2007/04/03/bash-parsing-arguments-with-getopts/
 # Documentation à titre indicatif
@@ -85,7 +90,8 @@ echo "export gtmver=$gtmver"                    >> $partdir/config/env
 echo "export instance=$instance"                >> $partdir/config/env
 echo "export partition=$partition"              >> $partdir/config/env
 
-echo "export gtm_icu_version=`icu-config --version`"		>> $partdir/config/env
+#buster# echo "export gtm_icu_version=`icu-config --version`"	>> $partdir/config/env
+echo "export gtm_icu_version=`uconv --version | cut -d' ' -f5`"	>> $partdir/config/env
 echo "export gtm_chset=UTF-8"			>> $partdir/config/env
 #echo "export LC_CTYPE=fr_FR.utf8"		>> $basedir/config/env
 
