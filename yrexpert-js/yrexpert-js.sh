@@ -96,12 +96,20 @@ cd $basedir/nodejs
 ##su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
 # Installer en mode global les outils de développement
+
+echo "0/6 @babel/core"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/core >> $basedir/log/installer@babel_core.log"
+echo "0/6 @babel/preset-react"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/core >> $basedir/log/installer@babel_preset-react.log"
+echo "0/6 @babel/preset-env"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/preset-env >> $basedir/log/installer@babel_preset-env.log"
+
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
-echo "2/6 uglify-es"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
+#echo "2/6 uglify-es"
+#su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
 echo "3/6 babelify"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify@8 >> $basedir/log/installerBabelify.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify >> $basedir/log/installerBabelify.log"
 echo "4/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
 echo "5/6 jsdoc"
@@ -121,7 +129,9 @@ ln -s /usr/bin/node /usr/bin/nodejs
 
 echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
-su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class-properties ] ] App.js | uglifyjs > ../../build/bundle.js"
+#su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
+
+su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class-properties ] ] App.js > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/css/json-inspector.css build/json-inspector.css"
