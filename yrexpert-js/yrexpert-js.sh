@@ -101,7 +101,7 @@ su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nv
 echo "2/6 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
 echo "3/6 babelify"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify >> $basedir/log/installerBabelify.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify@8 >> $basedir/log/installerBabelify.log"
 echo "4/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
 echo "5/6 jsdoc"
