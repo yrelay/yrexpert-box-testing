@@ -103,8 +103,8 @@ cd $basedir/nodejs
 #su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/core >> $basedir/log/installer@babel_preset-react.log"
 #echo "0/6 @babel/preset-env"
 #su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/preset-env >> $basedir/log/installer@babel_preset-env.log"
-echo "0/6 @babel/plugin-transform-class-properties"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/plugin-transform-class-properties >> $basedir/log/installer@babel_plugin-transform-class-properties.log"
+echo "0/6 babel-plugin-transform-class-properties"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babel-plugin-transform-class-properties >> $basedir/log/installerBabel-plugin-transform-class-properties.log"
 
 
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
