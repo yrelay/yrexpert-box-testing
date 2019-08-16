@@ -103,8 +103,8 @@ cd $basedir/nodejs
 #su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/core >> $basedir/log/installer@babel_preset-react.log"
 #echo "0/6 @babel/preset-env"
 #su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet @babel/preset-env >> $basedir/log/installer@babel_preset-env.log"
-echo "0/6 babel-plugin-transform-class-properties"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babel-plugin-transform-class-properties >> $basedir/log/installerBabel-plugin-transform-class-properties.log"
+#echo "0/6 babel-plugin-transform-class-properties"
+#su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babel-plugin-transform-class-properties >> $basedir/log/installerBabel-plugin-transform-class-properties.log"
 
 
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
@@ -134,7 +134,7 @@ echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
 #su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
 
-su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class-properties ] ] App.js | uglifyjs > ../../build/bundle.js"
+su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/css/json-inspector.css build/json-inspector.css"
