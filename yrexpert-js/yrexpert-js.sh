@@ -14,7 +14,7 @@ if [[ -z $instance && $gtmver && $gtm_dist && $basedir ]]; then
 fi
 
 # Définir la version de node
-nodever="8" #version LST
+nodever="12" #version LST = 10
 
 # Définir la variable arch
 arch=$(uname -m | tr -d _)
@@ -34,7 +34,7 @@ cd $basedir
 
 # Installer node.js en utilisant NVM (node version manager) - https://github.com/creationix/nvm
 echo "Télécharger et installer NVM"
-su $instance -c "curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash"
+su $instance -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
 echo "Installation de NVM terminé"
 
 # Installer node $nodever
