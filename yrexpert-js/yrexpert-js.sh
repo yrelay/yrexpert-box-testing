@@ -97,6 +97,8 @@ cd $basedir/nodejs
 
 # Installer en mode global les outils de développement
 
+echo "0/6 standard"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g standard >> $basedir/log/installerStandard.log"
 echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
 echo "2/6 uglify-es"
