@@ -14,7 +14,7 @@ if [[ -z $instance && $gtmver && $gtm_dist && $basedir ]]; then
 fi
 
 # Définir la version de node
-nodever="12" #version LST = 10
+nodever="10" #version LST = 10
 
 # Définir la variable arch
 arch=$(uname -m | tr -d _)
@@ -115,8 +115,9 @@ ln -s /usr/bin/node /usr/bin/nodejs
 
 echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
-su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
+#su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
 #su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ babel-plugin-transform-class-properties ] ] App.js | uglifyjs > ../../build/bundle.js"
+su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] ] App.js | uglifyjs > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/css/json-inspector.css build/json-inspector.css"
