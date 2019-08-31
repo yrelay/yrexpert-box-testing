@@ -21,9 +21,7 @@ fi
 #apt-get install chkconfig
 
 # Si icu-config n'est pas installé
-#buster# apt-get install -y libicu-dev
-apt-get update
-apt-get install -y icu-devtools
+apt-get install -y libicu-dev
 
 # Options
 # Utilisation http://rsalveti.wordpress.com/2007/04/03/bash-parsing-arguments-with-getopts/
@@ -170,7 +168,7 @@ echo "export gtm_arch=$gtm_arch"                >> $basedir/config/env
 echo "export gtmver=$gtmver"                    >> $basedir/config/env
 echo "export instance=$instance"                >> $basedir/config/env
 
-#buster# echo "export gtm_icu_version=`icu-config --version`"		>> $basedir/config/env
+# echo "export gtm_icu_version=`icu-config --version`"		>> $basedir/config/env // n'existe pas Debian Buster
 echo "export gtm_icu_version=`uconv --version | cut -d' ' -f5`"	>> $basedir/config/env
 echo "export gtm_chset=UTF-8"			>> $basedir/config/env
 #echo "export LC_CTYPE=fr_FR.utf8"		>> $basedir/config/env

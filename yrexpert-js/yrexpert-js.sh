@@ -14,7 +14,7 @@ if [[ -z $instance && $gtmver && $gtm_dist && $basedir ]]; then
 fi
 
 # Définir la version de node
-nodever="10" #version LST = 10
+nodever="8" #version LST
 
 # Définir la variable arch
 arch=$(uname -m | tr -d _)
@@ -34,7 +34,7 @@ cd $basedir
 
 # Installer node.js en utilisant NVM (node version manager) - https://github.com/creationix/nvm
 echo "Télécharger et installer NVM"
-su $instance -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash"
+su $instance -c "curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash"
 echo "Installation de NVM terminé"
 
 # Installer node $nodever
@@ -85,29 +85,32 @@ chown $instance:$instance $basedir/nodejs/yrexpert-termSilent.js
 
 # Installer les modules de node requis dans $basedir/nodejs
 cd $basedir/nodejs
-# Installer en mode global les outils de développement
+#echo "0/5 Initialiser le fichier package.json"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.name 'yrelay' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.email 'info@yrelay.fr' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.author.url 'https://www.yrelay.fr' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm set init.license 'GPL-3.0' >> $basedir/log/initNpm.log"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm init -y >> $basedir/log/initNpm.log"
 
-echo "1/7 browserify" # http://doc.progysm.com/doc/browserify
+# Installer en mode global les outils de développement
+echo "1/6 browserify" # http://doc.progysm.com/doc/browserify
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g browserify >> $basedir/log/installerBrowserify.log"
-echo "2/7 uglify-es"
+echo "2/6 uglify-es"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g uglify-es >> $basedir/log/installerUglify-es.log"
-echo "3/7 babelify"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet babelify >> $basedir/log/installerBabelify.log"
-echo "4/7 marked"
+echo "3/6 marked"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g marked >> $basedir/log/installerMarked.log"
-echo "5/7 jsdoc"
+echo "4/6 jsdoc"
 su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jsdoc >> $basedir/log/installerJsdoc.log"
-echo "6/7 jshint"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet -g jshint >> $basedir/log/installerJshint.log"
 
 # Installer les modules locaux
-echo "7/7 yrexpert-js"
-su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet git+https://git@github.com/yrelay/yrexpert-js-testing.git >> $basedir/log/installerYrexpert-js.log"
+echo "5/6 yrexpert-js"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-prod yrexpert-js >> $basedir/log/installerYrexpert-js.log"
+echo "6/6 babelify@next"
+su $instance -c "source $basedir/.nvm/nvm.sh && source $basedir/config/env && nvm use $nodever && npm install --quiet --save-dev babelify@next >> $basedir/log/installerBabelify@next.log"
 
 # Certaines distributions linux installent nodejs non comme exécutable "node" mais comme "nodejs".
-# Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire".
-# Quelque chose de similaire se produit également avec "python2" non lié à "python".
-# Dans ce cas, vous pouvez faire un lien symbolique. Pour les distributions linux qui installent des binaires de package dans /usr/bin, vous pouvez faire.
+# Dans ce cas, vous devez lier manuellement à "node", car de nombreux paquets sont programmés après le node "binaire". Quelque chose de similaire se produit également avec "python2" non lié à "python".
+# Dans ce cas, vous pouvez faire un lien symbolique. Pour les distributions linux qui installent des binaires de package dans /usr/bin, vous pouvez faire
 if [ -h /usr/bin/nodejs ]; then
   rm -f /usr/bin/nodejs
 fi
@@ -115,8 +118,6 @@ ln -s /usr/bin/node /usr/bin/nodejs
 
 echo "Créer le fichier bundle.js requis par l'application"
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && rm -rf build && mkdir build"
-#su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-transform-class ] ] App.js | uglifyjs > ../../build/bundle.js"
-#su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] --plugins [ babel-plugin-transform-class-properties ] ] App.js | uglifyjs > ../../build/bundle.js"
 su - $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js/src/js && browserify -t [ babelify --presets [@babel/preset-env @babel/preset-react] ] App.js | uglifyjs > ../../build/bundle.js"
 
 su $instance -c "cd $basedir/nodejs/node_modules/yrexpert-js && cp -f src/index.html build/index.html"

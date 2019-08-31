@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
   # Chaque environnement virtuel Vagrant nécessite une box.
   # source : https://app.vagrantup.com/debian
-  config.vm.box      = "debian/stretch64"
+  config.vm.box      = "debian/jessie64"
   config.vm.hostname = "yrexpert-box"
   # Chaque environnement virtuel Vagrant nécessite une box.
   #config.vm.box = "Official Ubuntu 12.04 current daily Cloud Image amd64"
