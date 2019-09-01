@@ -196,7 +196,7 @@ elif [[ -n "$USERNAME" ]]; then
     utilisateurPrincipal=$USERNAME
 else
     echo "Nom d'utilisateur non trouvé ou approprié à ajouter au groupe $instance"
-    exit 1
+    #########################exit 1
 fi
 
 echo "Ce script va ajouter $utilisateurPrincipal au groupe $instance"
