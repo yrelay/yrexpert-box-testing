@@ -196,6 +196,7 @@ elif [[ -n "$USERNAME" ]]; then
     utilisateurPrincipal=$USERNAME
 else
     echo "Nom d'utilisateur non trouvé ou approprié à ajouter au groupe $instance"
+    utilisateurPrincipal='root'
     #########################exit 1
 fi
 
@@ -222,15 +223,15 @@ if [ -d /vagrant ]; then
 
 else
     # TODO: à commenter
-    if [ -d /home/$utilisateurPrincipal/yrelay/yrexpert-box ]; then
-        repScript=/home/$utilisateurPrincipal/yrelay/yrexpert-box
+    if [ -d /home/$utilisateurPrincipal/yrelay/yrexpert-box-testing ]; then
+        repScript=/home/$utilisateurPrincipal/yrelay/yrexpert-box-testing
     else
-        if [ -d /usr/local/src/yrexpert-box ]; then
-            rm -rf /usr/local/src/yrexpert-box
+        if [ -d /usr/local/src/yrexpert-box-testing ]; then
+            rm -rf /usr/local/src/yrexpert-box-testing
         fi
         cd /usr/local/src
-        git clone -q $cheminDepotBox yrexpert-box
-        repScript=/usr/local/src/yrexpert-box
+        git clone -q $cheminDepotBox yrexpert-box-testing
+        repScript=/usr/local/src/yrexpert-box-testing
     fi
 fi
 
