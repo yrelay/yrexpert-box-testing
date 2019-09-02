@@ -28,7 +28,7 @@ else
 
   sudo apt-get update
   sudo apt-get install -y build-essential libssl-dev
-  sudo apt-get install -y wget gzip openssh-server curl python-minimal libelf1
+  sudo apt-get install -y wget gzip openssh-server curl python-minimal libelf1 libncurses5
 
   # GT.M
 
