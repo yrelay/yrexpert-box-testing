@@ -51,6 +51,7 @@ else
   fi
 
   # S'assurer que le répertoire existe pour les liens vers GT.M actuel
+  sudo mkdir -p $gtmroot/previous_`date -u +%Y-%m-%d:%H:%M:%S`
   sudo mkdir -p $gtmcurrent
   
   # Télécharger et installer GT.M, y compris UTF-8 mode
