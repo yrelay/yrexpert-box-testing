@@ -189,15 +189,16 @@ echo "Ré-installation : $reInstall"
 echo "Passer les tests : $passerLesTests"
 echo "!--------------------------------------------------------------------------!"
 
-# Obtenir le nom de l'utilisateur principal si vous utilisez sudo, default si $username n'est pas sudo
+# Obtenir le nom de l'utilisateur principal si vous utilisez sudo, default si $username n'est pas sudo ou root si $(id -u)=0
 if [[ -n "$SUDO_USER" ]]; then
     utilisateurPrincipal=$SUDO_USER
 elif [[ -n "$USERNAME" ]]; then
     utilisateurPrincipal=$USERNAME
+elif [[ $EUID -ne 0 ]]; then
+    utilisateurPrincipal="root"
 else
     echo "Nom d'utilisateur non trouvé ou approprié à ajouter au groupe $instance"
-    utilisateurPrincipal='root'
-    #########################exit 1
+    exit 1
 fi
 
 echo "Ce script va ajouter $utilisateurPrincipal au groupe $instance"
