@@ -194,7 +194,7 @@ if [[ -n "$SUDO_USER" ]]; then
     utilisateurPrincipal=$SUDO_USER
 elif [[ -n "$USERNAME" ]]; then
     utilisateurPrincipal=$USERNAME
-elif [[ $EUID -ne 0 ]]; then
+elif [[ $EUID == 0 ]]; then
     utilisateurPrincipal="root"
 else
     echo "Nom d'utilisateur non trouvé ou approprié à ajouter au groupe $instance"
