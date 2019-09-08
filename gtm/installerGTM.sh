@@ -30,20 +30,21 @@ echo "Preparer l'environment"
 sudo apt-get update
 sudo apt-get install -y build-essential libssl-dev
 sudo apt-get install -y wget gzip openssh-server curl python-minimal libelf1 libncurses5
-sudo apt-get install -y libncurses5 # ***************************************************
 
 # GT.M
 
 echo 'Installer GT.M'
 
-# Si existe supprimer le répertoire temporaire
-if [ -d /tmp/gtminstall ] ; then
-  sudo rm -rf /tmp/gtminstall
-fi
-mkdir /tmp/gtminstall # Créer un répertoire temporaire pour le programme d'installation
-cd /tmp/gtminstall    # Se déplacer sur le répertoire temporaire
-wget https://sourceforge.net/projects/fis-gtm/files/GT.M%20Installer/v0.14/gtminstall #  Télécharger le programme d'installation GT.M
-chmod +x gtminstall # Rendre le fichier exécutable
+# V014B******************************************************************
+# # Si existe supprimer le répertoire temporaire
+# if [ -d /tmp/gtminstall ] ; then
+#   sudo rm -rf /tmp/gtminstall
+# fi
+# mkdir /tmp/gtminstall # Créer un répertoire temporaire pour le programme d'installation
+# cd /tmp/gtminstall    # Se déplacer sur le répertoire temporaire
+# wget https://sourceforge.net/projects/fis-gtm/files/GT.M%20Installer/v0.14/gtminstall #  Télécharger le programme d'installation GT.M
+# chmod +x gtminstall # Rendre le fichier exécutable
+# V014B******************************************************************
 
 # Définir variables
 gtmroot=/usr/lib/fis-gtm
