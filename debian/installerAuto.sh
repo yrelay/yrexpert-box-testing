@@ -244,7 +244,7 @@ cd $repScript
 export debian=true;
 
 # Installer GTM
-cd gtm
+cd ./gtm
 ./installerGTM.sh
 
 # Créer une instance YRexpert
