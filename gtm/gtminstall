@@ -507,6 +507,7 @@ tmp=`head -1 configure | cut -f 1`
 if [ "#!/bin/sh" != "$tmp" ] ; then
     echo "#!/bin/sh" >configure.sh
 fi
+
 cat configure >>configure.sh
 chmod +x configure.sh
 
@@ -514,7 +515,7 @@ chmod +x configure.sh
 if [ "Y" = "$gtm_dryrun" ] ; then echo Installation prepared in $gtm_tmp ; exit ; fi
 
 # Correction bug pour utiliser Docker (0.14B)
-sed -i 's|[ "`./geteuid`" != "root" ]|[[ $EUID != 0 ]]|' ./configure.sh
+sed -i 's|"`./geteuid`" != "root"|$EUID != 0|' ./configure.sh
 
 ./configure.sh <$gtm_configure_in 1> $gtm_tmp/configure_${timestamp}.out 2>$gtm_tmp/configure_${timestamp}.err
 if [ $? -gt 0 ] ; then cat $gtm_tmp/configure_${timestamp}.out $gtm_tmp/configure_${timestamp}.err ; fi
