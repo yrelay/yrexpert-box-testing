@@ -41,7 +41,7 @@ usage()
     Ce script permet de créer automatiquement une instance YRexpert pour GT.M sur Debian
 
     DEFAULTS:
-      Dépôt yrexpert-box alternatif = https://github.com/yrelay/yrexpert-box-testing.git
+      Dépôt yrexpert-box alternatif = https://github.com/yrelay/yrexpert-box.git
       Dépôt yrexpert-m alternatif = https://github.com/yrelay/yrexpert-m.git
       Dépôt yrexpert-js alternatif = https://github.com/yrelay/yrexpert-js.git
       Dépôt de la partition utilisateur = https://github.com/yrelay/yrexpert-dmo.git
@@ -117,7 +117,7 @@ done
 # Paramètres par défaut pour les options
 if [[ -z $cheminDepot ]]; then
     cheminDepot="https://github.com/yrelay/"
-    cheminDepotBox="https://github.com/yrelay/yrexpert-box-testing.git"
+    cheminDepotBox="https://github.com/yrelay/yrexpert-box.git"
     cheminDepotM="https://github.com/yrelay/yrexpert-m.git"
     cheminDepotJS="https://github.com/yrelay/yrexpert-js.git"
     cheminDepotPartUtil="https://github.com/yrelay/yrexpert-dmo.git"
@@ -214,7 +214,7 @@ apt-get update -qq > /dev/null
 apt-get install -qq -y build-essential cmake-curses-gui git dos2unix daemon > /dev/null
 
 # Voir si le dossier vagrant existe si oui l'utiliser. si non cloner le dépôt
-if [ -d /vagrant ]; then
+if [ -n "`ls -A /vagrant`" ]; then
     repScript=/vagrant
 
     # Convertir les fins de lignes
@@ -224,15 +224,15 @@ if [ -d /vagrant ]; then
 
 else
     # TODO: à commenter
-    if [ -d /home/$utilisateurPrincipal/yrelay/yrexpert-box-testing ]; then
-        repScript=/home/$utilisateurPrincipal/yrelay/yrexpert-box-testing
+    if [ -d /home/$utilisateurPrincipal/yrelay/yrexpert-box ]; then
+        repScript=/home/$utilisateurPrincipal/yrelay/yrexpert-box
     else
-        if [ -d /usr/local/src/yrexpert-box-testing ]; then
-            rm -rf /usr/local/src/yrexpert-box-testing
+        if [ -d /usr/local/src/yrexpert-box ]; then
+            rm -rf /usr/local/src/yrexpert-box
         fi
         cd /usr/local/src
-        git clone -q $cheminDepotBox yrexpert-box-testing
-        repScript=/usr/local/src/yrexpert-box-testing
+        git clone -q $cheminDepotBox yrexpert-box
+        repScript=/usr/local/src/yrexpert-box
     fi
 fi
 
